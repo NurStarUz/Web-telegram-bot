@@ -10,7 +10,7 @@ from fastapi import FastAPI
 import uvicorn
 
 # 🔹 1️⃣ Render uchun PORT'ni olish
-PORT = int(os.getenv("PORT", 8000))
+PORT = int(os.getenv("PORT", 8080))
 
 # 🔹 2️⃣ Telegram API Token'ni olish
 API_TOKEN = os.getenv("API_TOKEN")
