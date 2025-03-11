@@ -3,7 +3,8 @@ import json
 import os
 import random
 import asyncio
-from aiogram import Bot, Dispatcher, types, Router
+from aiogram import Bot, Dispatcher, types, Router, F
+from aiogram.filters import Command
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 from fastapi import FastAPI
 import uvicorn
@@ -37,7 +38,7 @@ except FileNotFoundError:
 user_tests = {}
 
 # 🔹 7️⃣ Web sahifani ochish uchun tugma yaratish
-@router.message(commands=['start'])
+@router.message(Command("start"))
 async def start_cmd(message: types.Message):
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     web_button = KeyboardButton(
@@ -48,7 +49,7 @@ async def start_cmd(message: types.Message):
     await message.answer("👋 Web botga xush kelibsiz!", reply_markup=keyboard)
 
 # 🔹 8️⃣ Testni boshlash
-@router.message(commands=['test'])
+@router.message(Command("test"))
 async def start_test(message: types.Message):
     user_id = message.from_user.id
     if not tests:
