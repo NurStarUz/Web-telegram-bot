@@ -1,0 +1,112 @@
+[
+    {
+        "savol": "Buxgalteriya hisobi qanday turlarga bo‘linadi?",
+        "variantlar": [
+            "Moliyaviy va boshqaruv hisobi",
+            "Statistik va moliyaviy hisobi",
+            "Nazorat va boshqaruv hisobi",
+            "Operativ va moliyaviy hisobi"
+        ],
+        "togri": 0
+    },
+    {
+        "savol": "Hisob uslublariga nimalar kiradi?",
+        "variantlar": [
+            "Rejalashtirish, nazorat qilish, iqtisodiy tahlil",
+            "Investitsiyalarni boshqarish, risklarni kamaytirish",
+            "Baholash, hujjatlashtirish, hisob registrlari, balans usuli",
+            "Buxgalteriya siyosatini ishlab chiqish"
+        ],
+        "togri": 2
+    },
+    {
+        "savol": "Moliyaviy hisobotning asosiy maqsadi nima?",
+        "variantlar": [
+            "Soliqlarni kamaytirish",
+            "Moliyaviy natijalarni tahlil qilish va taqdim etish",
+            "Xodimlarning ish haqi to‘lovlarini nazorat qilish",
+            "Korxona rentabelligini oshirish"
+        ],
+        "togri": 1
+    },
+    {
+        "savol": "Buxgalteriya hisobida amortizatsiya nima?",
+        "variantlar": [
+            "Asosiy vositalarning qiymatini kamaytirish jarayoni",
+            "Daromad va xarajatlarni balanslash usuli",
+            "Soliq stavkasini belgilash",
+            "Mavjud mablag‘larni hisobga olish"
+        ],
+        "togri": 0
+    },
+    {
+        "savol": "Xo‘jalik hisobining qanday turlari mavjud?",
+        "variantlar": [
+            "Buxgalterlik va operativ texnik",
+            "Buxgalterlik va statistik",
+            "Operativ-texnik, statistik va buxgalterlik",
+            "Operativ texnik va statistik"
+        ],
+        "togri": 2
+    },
+    {
+        "savol": "Hisobda qanday o‘lchov birliklari qo‘llaniladi?",
+        "variantlar": [
+            "Mehnat, natura, pul",
+            "Tonna, kg, litr, so‘m",
+            "Natura va mehnat",
+            "Mehnat va pul"
+        ],
+        "togri": 0
+    },
+    {
+        "savol": "Buxgalteriya hisobi qanday printsiplarga asoslanadi?",
+        "variantlar": [
+            "Iqtisodiy mazmun, hujjatlashtirish, uzluksizlik",
+            "Soddalik, tezkorlik, ishonchlilik",
+            "O‘zgaruvchanlik, rejalilik, bevositalik",
+            "Moliyaviy natija, me’yoriy hujjatlar, joriy tahlil"
+        ],
+        "togri": 0
+    },
+    {
+        "savol": "Xo‘jalik hisobi deganda nima tushuniladi?",
+        "variantlar": [
+            "Xo‘jalik hisobi – bu buxgalteriya hisobi",
+            "Xo‘jalik hisobi – bu boshqaruv hisobi",
+            "Kuzatish, o‘lchash ma’lumotlarni to‘plash",
+            "Xo‘jalik hisobi – bu operativ hisob"
+        ],
+        "togri": 2
+    },
+    {
+        "savol": "Buxgalteriya balansining asosiy elementi nima?",
+        "variantlar": [
+            "Aktivlar, majburiyatlar, kapital",
+            "Naqd pul, hisobvaraqlar, kreditlar",
+            "Daromadlar, xarajatlar, foyda",
+            "Soliq qarzlari, subyektlar, auditorlik tekshiruvi"
+        ],
+        "togri": 0
+    },
+    {
+        "savol": "Buxgalteriya hisobining asosiy vazifasi nima?",
+        "variantlar": [
+            "Korxona xo‘jalik operatsiyalarini to‘g‘ri aks ettirish",
+            "Soliqlarni hisoblash va to‘lash",
+            "Xodimlar mehnat faoliyatini baholash",
+            "Bozor sharoitlarini tahlil qilish"
+        ],
+        "togri": 0
+    },
+    {
+        "savol": "Buxgalteriya hisobida qaysi hujjatlar ishlatiladi?",
+        "variantlar": [
+            "Shartnoma, biznes-reja, hisobot",
+            "Ma’lumotnoma, guvohnoma, soliq deklaratsiyasi",
+            "Schyot-faktura, to‘lov topshiriqnomasi, kirim va chiqim orderlari",
+            "Reklama materiallari, katalog, veb-sayt ma’lumotlari"
+        ],
+        "togri": 2
+    }
+]
