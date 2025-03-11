@@ -16,7 +16,8 @@ if not API_TOKEN:
     raise ValueError("❌ ERROR: API_TOKEN o‘rnatilmagan yoki noto‘g‘ri!")
 
 bot = Bot(token=API_TOKEN)
-dp = Dispatcher(bot)
+dp = Dispatcher()
+bot = Bot(token=API_TOKEN)
 app = FastAPI()
 
 @app.get("/")
