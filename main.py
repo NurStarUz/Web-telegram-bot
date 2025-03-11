@@ -3,27 +3,46 @@ import json
 import os
 import random
 import asyncio
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher, types, Router
 from aiogram.filters import Command
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 from fastapi import FastAPI
 import uvicorn
 
+# 🔹 1️⃣ Render uchun PORT'ni olish
 PORT = int(os.getenv("PORT", 8080))
+
+# 🔹 2️⃣ Telegram API Token'ni olish
 API_TOKEN = os.getenv("API_TOKEN")
 
 if not API_TOKEN:
     raise ValueError("❌ ERROR: API_TOKEN o‘rnatilmagan yoki noto‘g‘ri!")
 
+# 🔹 3️⃣ Aiogram botini yaratish
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
-bot = Bot(token=API_TOKEN)
+router = Router()
+dp.include_router(router)
+
+# 🔹 4️⃣ FastAPI web serverini yaratish
 app = FastAPI()
 
 @app.get("/")
 def read_root():
     return {"message": "🚀 FastAPI server ishlayapti!"}
 
+# 🔹 5️⃣ Asinxron ishga tushirish funksiyasi
+async def start_services():
+    logging.basicConfig(level=logging.INFO)
+    await bot.delete_webhook(drop_pending_updates=True)
+    asyncio.create_task(dp.start_polling(bot))  # Botni asinxron ishga tushiramiz
+    config = uvicorn.Config(app, host="0.0.0.0", port=PORT, loop="asyncio")
+    server = uvicorn.Server(config)
+    await server.serve()  # Uvicorn serverini asinxron ishga tushiramiz
+
+# 🔹 6️⃣ Asosiy ishga tushirish
+if __name__ == "__main__":
+    asyncio.run(start_services())  # ❌ Xato asyncio.run() ishlatilmayapti
 try:
     with open("tests.json", "r", encoding="utf-8") as f:
         tests = json.load(f)
