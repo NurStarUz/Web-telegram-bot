@@ -3,7 +3,7 @@ import json
 import os
 import random
 import asyncio
-from aiogram import Bot, Dispatcher, types, Router, F
+from aiogram import Bot, Dispatcher, types, Router
 from aiogram.filters import Command
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 from fastapi import FastAPI
@@ -20,9 +20,9 @@ if not API_TOKEN:
 
 # 🔹 3️⃣ Aiogram botini yaratish
 bot = Bot(token=API_TOKEN)
-dp = Dispatcher()  # 🔹 Dispatcher yaratish
-router = Router()  # 🔹 Router yaratish
-dp.include_router(router)  # 🔹 Dispatcher'ga router qo‘shish
+dp = Dispatcher()
+router = Router()
+dp.include_router(router)
 
 # 🔹 4️⃣ FastAPI web serverini yaratish
 app = FastAPI()
@@ -43,7 +43,7 @@ async def start_cmd(message: types.Message):
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     web_button = KeyboardButton(
         text="🌐 Web Botni Ochish",
-        web_app=WebAppInfo(url="https://your-web-url.com")  # Bu yerga web sahifa URL'ni qo‘ying
+        web_app=WebAppInfo(url="https://your-web-url.com")  # Web sahifa URL'sini qo‘ying
     )
     keyboard.add(web_button)
     await message.answer("👋 Web botga xush kelibsiz!", reply_markup=keyboard)
@@ -103,11 +103,14 @@ def get_questions():
     return {"questions": tests}
 
 # 🔹 1️⃣2️⃣ FastAPI serveri va botni ishga tushirish
-async def main():
+async def start_bot():
     logging.basicConfig(level=logging.INFO)
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
     logging.info(f"🚀 Server ishga tushdi! Port: {PORT}")
-    asyncio.create_task(main())  # 🔥 Aiogram botni ishga tushirish
+
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    loop.create_task(start_bot())  # 🔥 Aiogram botni ishga tushirish
     uvicorn.run(app, host="0.0.0.0", port=PORT)  # 🔥 FastAPI serverni ishga tushirish
