@@ -3,7 +3,7 @@ import json
 import os
 import random
 import asyncio
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher, types, Router
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 from fastapi import FastAPI
 import uvicorn
@@ -19,7 +19,9 @@ if not API_TOKEN:
 
 # 🔹 3️⃣ Aiogram botini yaratish
 bot = Bot(token=API_TOKEN)
-dp = Dispatcher()
+dp = Dispatcher()  # 🔹 Dispatcher yaratish
+router = Router()  # 🔹 Router yaratish
+dp.include_router(router)  # 🔹 Dispatcher'ga router qo‘shish
 
 # 🔹 4️⃣ FastAPI web serverini yaratish
 app = FastAPI()
@@ -35,7 +37,7 @@ except FileNotFoundError:
 user_tests = {}
 
 # 🔹 7️⃣ Web sahifani ochish uchun tugma yaratish
-@dp.message_handler(commands=['start'])
+@router.message(commands=['start'])
 async def start_cmd(message: types.Message):
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     web_button = KeyboardButton(
@@ -46,7 +48,7 @@ async def start_cmd(message: types.Message):
     await message.answer("👋 Web botga xush kelibsiz!", reply_markup=keyboard)
 
 # 🔹 8️⃣ Testni boshlash
-@dp.message_handler(commands=['test'])
+@router.message(commands=['test'])
 async def start_test(message: types.Message):
     user_id = message.from_user.id
     if not tests:
@@ -80,7 +82,7 @@ async def send_question(message, user_id):
     )
 
 # 🔹 🔟 Foydalanuvchining javobini qayta ishlash
-@dp.poll_answer_handler()
+@router.poll_answer()
 async def handle_poll_answer(poll_answer: types.PollAnswer):
     user_id = poll_answer.user.id
     if user_id in user_tests:
