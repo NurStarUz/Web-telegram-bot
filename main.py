@@ -76,12 +76,11 @@ async def handle_poll_answer(poll_answer: types.PollAnswer):
         user_tests[user_id]["current_index"] += 1
         message = types.Message(chat=types.Chat(id=poll_answer.user.id, type="private"))
         await send_question(message, user_id)
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    executor.start_polling(dp, skip_updates=True)
-    uvicorn.run(app, host="0.0.0.0", port=8000)
 # 🔹 Web interfeys uchun testlarni API orqali yuborish
 @app.get("/get_questions")
 def get_questions():
     return {"questions": tests}
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
+    executor.start_polling(dp, skip_updates=True)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
