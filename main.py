@@ -10,8 +10,9 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from fastapi import FastAPI, Request
 import uvicorn
 
-# 🔹 1️⃣ Render uchun PORT'ni olish
-PORT = int(os.getenv("PORT", 8080))
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))  # Render avtomatik belgilagan portni ishlatish
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)
 
 # 🔹 2️⃣ Telegram API Token'ni olish
 API_TOKEN = os.getenv("API_TOKEN")
