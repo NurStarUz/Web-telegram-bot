@@ -8,7 +8,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 from fastapi import FastAPI
 import uvicorn
 
-# 🔹 1️⃣ Render uchun portni olish (agar PORT yo‘q bo‘lsa, 8000-ni ishlatadi)
+# 🔹 1️⃣ Render uchun PORT'ni olish (agar mavjud bo‘lmasa, 8000-ni ishlatadi)
 PORT = int(os.getenv("PORT", 8000))
 
 # 🔹 2️⃣ Telegram API Token'ni olish (Render'dagi Environment Variables orqali)
@@ -40,7 +40,7 @@ async def start_cmd(message: types.Message):
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     web_button = KeyboardButton(
         text="🌐 Web Botni Ochish",
-        web_app=WebAppInfo(url="https://your-web-url.com")  # Bu yerga web sahifa URL'sini qo‘ying
+        web_app=WebAppInfo(url="https://your-web-url.com")  # Bu yerga web sahifa URL'ni qo‘ying
     )
     keyboard.add(web_button)
     await message.answer("👋 Web botga xush kelibsiz!", reply_markup=keyboard)
