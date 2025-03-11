@@ -14,6 +14,7 @@ API_TOKEN = os.getenv("API_TOKEN")
 # 🔹 2️⃣ Aiogram botini yaratish
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
+API_TOKEN = "677810027:AAHqD6IwmCUmRfdeskvTOx-0LwLiK-f8RM4"  # Tokenni qo‘lda yozing
 
 # 🔹 3️⃣ FastAPI web serverini yaratish
 app = FastAPI()
