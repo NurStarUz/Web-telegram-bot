@@ -9,10 +9,10 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 from fastapi import FastAPI
 import uvicorn
 
-# 🔹 1️⃣ Render uchun PORT'ni olish (agar mavjud bo‘lmasa, 8000-ni ishlatadi)
+# 🔹 1️⃣ Render uchun PORT'ni olish
 PORT = int(os.getenv("PORT", 8000))
 
-# 🔹 2️⃣ Telegram API Token'ni olish (Render'dagi Environment Variables orqali)
+# 🔹 2️⃣ Telegram API Token'ni olish
 API_TOKEN = os.getenv("API_TOKEN")
 
 if not API_TOKEN:
@@ -27,17 +27,22 @@ dp.include_router(router)
 # 🔹 4️⃣ FastAPI web serverini yaratish
 app = FastAPI()
 
-# 🔹 5️⃣ Testlarni yuklash (JSON fayl)
+# 🔹 5️⃣ FastAPI asosiy sahifasi (`GET /` endpoint)
+@app.get("/")
+def read_root():
+    return {"message": "🚀 FastAPI server ishlayapti!"}
+
+# 🔹 6️⃣ Testlarni yuklash
 try:
     with open("tests.json", "r", encoding="utf-8") as f:
         tests = json.load(f)
 except FileNotFoundError:
     tests = []
 
-# 🔹 6️⃣ Foydalanuvchi test natijalarini saqlash
+# 🔹 7️⃣ Foydalanuvchi test natijalarini saqlash
 user_tests = {}
 
-# 🔹 7️⃣ Web sahifani ochish uchun tugma yaratish
+# 🔹 8️⃣ Web sahifani ochish tugmasi
 @router.message(Command("start"))
 async def start_cmd(message: types.Message):
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
@@ -48,7 +53,7 @@ async def start_cmd(message: types.Message):
     keyboard.add(web_button)
     await message.answer("👋 Web botga xush kelibsiz!", reply_markup=keyboard)
 
-# 🔹 8️⃣ Testni boshlash
+# 🔹 9️⃣ Testni boshlash
 @router.message(Command("test"))
 async def start_test(message: types.Message):
     user_id = message.from_user.id
@@ -63,7 +68,7 @@ async def start_test(message: types.Message):
     }
     await send_question(message, user_id)
 
-# 🔹 9️⃣ Foydalanuvchiga test savolini yuborish
+# 🔹 🔟 Foydalanuvchiga test yuborish
 async def send_question(message, user_id):
     test_index = user_tests[user_id]["current_index"]
     if test_index >= len(user_tests[user_id]["questions"]):
@@ -82,7 +87,7 @@ async def send_question(message, user_id):
         is_anonymous=False
     )
 
-# 🔹 🔟 Foydalanuvchining javobini qayta ishlash
+# 🔹 1️⃣1️⃣ Foydalanuvchi javobini qayta ishlash
 @router.poll_answer()
 async def handle_poll_answer(poll_answer: types.PollAnswer):
     user_id = poll_answer.user.id
@@ -97,12 +102,12 @@ async def handle_poll_answer(poll_answer: types.PollAnswer):
         message = types.Message(chat=types.Chat(id=poll_answer.user.id, type="private"))
         await send_question(message, user_id)
 
-# 🔹 1️⃣1️⃣ Web interfeys uchun testlarni API orqali yuborish
+# 🔹 1️⃣2️⃣ Web API (`/get_questions` endpoint)
 @app.get("/get_questions")
 def get_questions():
     return {"questions": tests}
 
-# 🔹 1️⃣2️⃣ FastAPI serveri va botni ishga tushirish
+# 🔹 1️⃣3️⃣ FastAPI serveri va botni ishga tushirish
 async def start_bot():
     logging.basicConfig(level=logging.INFO)
     await dp.start_polling(bot)
